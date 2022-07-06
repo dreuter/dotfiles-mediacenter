@@ -1,0 +1,10 @@
+*
+!/.gitignore.d/
+!/.gitignore.d/mediacenter
+!/provision/
+!/provision/beamy.yml
+!/provision/roles/
+!/provision/roles/dreuter.mediacenter/
+!/provision/roles/dreuter.mediacenter/**
+!/provision/roles/dreuter.shuttle-dq170/
+!/provision/roles/dreuter.shuttle-dq170/**
