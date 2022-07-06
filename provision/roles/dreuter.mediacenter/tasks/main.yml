@@ -6,6 +6,22 @@
     groups: cdrom,floppy,audio,video,plugdev,netdev,bluetooth,lpadmin,scanner
     append: yes
 
+- name: Install `kodi`
+  apt:
+    name: kodi
+    state: present
+    install_recommends: yes
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Set `kodi` as default session for `mediacenter`
+  copy:
+    src: mediacenter-session
+    dest: /var/lib/AccountsService/users/mediacenter
+    owner: root
+    group: root
+    mode: 644
+
 - name: Skip login screen
   lineinfile:
     path: /etc/gdm3/daemon.conf
