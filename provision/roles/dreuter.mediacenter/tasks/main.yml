@@ -1,2 +1,19 @@
 ---
-# tasks file for dreuter.mediacenter
+- name: Add a user for the mediacenter
+  user:
+    name: mediacenter
+    comment: Mediacenter
+    groups: cdrom,floppy,audio,video,plugdev,netdev,bluetooth,lpadmin,scanner
+    append: yes
+
+- name: Skip login screen
+  lineinfile:
+    path: /etc/gdm3/daemon.conf
+    regexp: '^#?\s*AutomaticLoginEnable\s*='
+    line: AutomaticLoginEnable = true
+
+- name: GDM should always login `mediacenter`
+  lineinfile:
+    path: /etc/gdm3/daemon.conf
+    regexp: '^#?\s*AutomaticLogin\s*='
+    line: AutomaticLogin = mediacenter
