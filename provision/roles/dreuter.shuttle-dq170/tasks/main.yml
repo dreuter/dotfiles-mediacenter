@@ -1,2 +1,11 @@
 ---
-# tasks file for dreuter.shuttle-dq170
+- name: Add non-free debian repository
+  apt_repository:
+    repo: deb http://deb.debian.org/debian bullseye contrib non-free
+    state: present
+    update_cache: yes
+
+- name: Install driver for BCM43142 wireless chipset
+  apt:
+    name: broadcom-sta-dkms
+    state: present
