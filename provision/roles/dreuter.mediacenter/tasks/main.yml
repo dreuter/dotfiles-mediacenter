@@ -33,3 +33,36 @@
     path: /etc/gdm3/daemon.conf
     regexp: '^#?\s*AutomaticLogin\s*='
     line: AutomaticLogin = mediacenter
+
+- name: Add non-free debian repository
+  apt_repository:
+    repo: deb http://deb.debian.org/debian bullseye contrib non-free
+    state: present
+    update_cache: yes
+
+- name: Check if `i386` architecture is already enabled
+  shell: dpkg --print-foreign-architectures
+  register: i386_result
+
+- name: Enable Multi-Arch
+  shell: dpkg --add-architecture i386
+  when: not i386_result.stdout is search('i386')
+
+- name: Update cache
+  apt:
+    update_cache: yes
+  when: not i386_result.stdout is search('i386')
+
+- name: Install `steam`
+  apt:
+    name: steam
+    state: present
+
+- name: Install packages the debian wiki recommends for `steam`
+  apt:
+    pkg:
+    - mesa-vulkan-drivers
+    - libglx-mesa0:i386
+    - mesa-vulkan-drivers:i386
+    - libgl1-mesa-dri:i386
+    state: present
