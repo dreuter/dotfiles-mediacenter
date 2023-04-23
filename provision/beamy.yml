@@ -1,4 +1,4 @@
 - hosts: all
   roles:
-  - role: dreuter.mediacenter
-  - role: dreuter.shuttle-dq170
+    - role: dreuter.mediacenter
+    - role: dreuter.shuttle-dq170
