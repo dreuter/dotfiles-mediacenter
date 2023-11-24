@@ -40,6 +40,16 @@
     state: present
     update_cache: yes
 
+- name: Install codecs
+  apt:
+    pkg:
+    - libdvdcss2
+    - libavcodec-extra
+    - vlc
+    state: present
+
+# TODO: sudo dpkg-reconfigure libdvd-pkg
+
 - name: Check if `i386` architecture is already enabled
   shell: dpkg --print-foreign-architectures
   register: i386_result
